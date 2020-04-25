@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "target": "es2018",
     "module": "commonjs",
-    "outDir": "./lib",
-    "rootDir": "./src",
+    "outDir": "backend/lib",
+    "rootDir": "backend/src",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "incremental": true,
+    "experimentalDecorators": true,
+    "lib": ["dom", "es2015"]
   },
-  "exclude": [
-    "test"
-  ]
+  "exclude": ["test"]
 }
