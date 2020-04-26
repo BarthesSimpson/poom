@@ -1,1 +1,1 @@
-web: if [[ $(git rev-parse --abbrev-ref HEAD) = "backend" ]] ; then npm run start ; else npm run start:ui ; fi
+web: if [[ $(git rev-parse --abbrev-ref HEAD) = "backend" ]] ; then npm run start ; else npm run ; fi

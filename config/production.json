@@ -1,4 +1,4 @@
 {
-  "host": "poom-server-app.feathersjs.com",
+  "host": "localhost",
   "port": "PORT"
 }
