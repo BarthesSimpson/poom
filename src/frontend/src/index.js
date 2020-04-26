@@ -1,8 +1,12 @@
 import feathers from "@feathersjs/client";
 import io from "socket.io-client";
 
-const backendHost = "http://localhost:3030";
-const frontendHost = "http://localhost:1234";
+let backendHost = "http://localhost:3030";
+let frontendHost = "http://localhost:1234";
+if (process.env.NODE_ENV === "production") {
+  backendHost = "https://poom-chat.herokuapp.com"
+  frontendHost = "https://poom-ui.herokuapp.com"
+}
 const socket = io(backendHost);
 const app = feathers();
 app.configure(feathers.socketio(socket));
