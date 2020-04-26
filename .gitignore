@@ -110,3 +110,7 @@ $RECYCLE.BIN/
 # Others
 lib/
 data/
+dist/
+public/
+.cache
+tsconfig.tsbuildinfo

@@ -1,0 +1,1 @@
+web: if [[ "$role" = "backend" ]] ; then npm run serve:backend ; else npm run serve:ui ; fi
