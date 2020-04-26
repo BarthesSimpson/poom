@@ -1,1 +1,1 @@
-web: if [[ "$role" = "backend" ]] ; then npm run start ; else npm run start:ui ; fi
+web: if [[ "$role" = "backend" ]] ; then npm run start ; else sudo apt-get install -y brotli && npm run serve:ui ; fi

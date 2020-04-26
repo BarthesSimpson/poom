@@ -29,12 +29,16 @@
     "dev": "ts-node-dev --no-notify src/backend/src/",
     "dev:ui": "npm run start:ui",
     "start": "NODE_ENV=production npm run compile && NODE_ENV=production node lib/backend/src",
-    "start:ui": "NODE_ENV=production parcel src/frontend/src/index.html --port ${PORT:-1234}",
+    "start:ui": "npm run build:ui && npm run serve:ui",
+    "serve:ui": "http-server --brotli --cors --utc --port ${PORT:-1234}",
+    "build:ui": "rm -rf dist/ && NODE_ENV=production parcel build src/frontend/src/index.html && npm run compress:ui",
     "jest": "jest  --forceExit",
     "test:watch": "jest --watch",
     "compile": "shx rm -rf lib/ && rm tsconfig.tsbuildinfo && tsc",
+    "compress:ui": "shx rm -rf public/ && cp -r dist public && brotli public/*",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "tsc --noEmit --watch"
+    "type-check:watch": "tsc --noEmit --watch",
+    "postinstall": "npm run build:ui"
   },
   "standard": {
     "env": [
@@ -62,6 +66,7 @@
     "cors": "^2.8.5",
     "feathers-nedb": "^5.1.0",
     "helmet": "^3.22.0",
+    "http-server": "^0.12.1",
     "nedb": "^1.8.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
