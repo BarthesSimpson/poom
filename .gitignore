@@ -111,6 +111,6 @@ $RECYCLE.BIN/
 lib/
 data/
 dist/
-public/
+/public/
 .cache
 tsconfig.tsbuildinfo
