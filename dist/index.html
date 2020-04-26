@@ -1,14 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" content="WebRTC code samples">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
+
+    <base target="_blank">
+
     <title>Poom</title>
-    <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/base.css">
-    <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/chat.css">
-  </head>
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/src.9ad09f98.css" type="text/css">
+  <script src="/src.9ad09f98.js"></script></head>
+
   <body>
-    <div id="root"></div>
-    <script src="/src.e31bb0bc.js"></script>
+    <div id="container">
+      <h1>Poom</h1>
+
+      <video id="localVideo" playsinline="" autoplay="" muted="" controls=""></video>
+      <video id="remoteVideo" playsinline="" autoplay="" controls=""></video>
+
+      <div class="box">
+        <button id="startButton">Start Video</button>
+        <button id="callButton">Join Call</button>
+        <button id="hangupButton">Hang Up</button>
+      </div>
+
+      <div class="box">
+        <span id="invitation"></span>
+      </div>
+    </div>
+
+    <!-- <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script> -->
+    <script src="/src.e31bb0bc.js" async=""></script>
   </body>
 </html>

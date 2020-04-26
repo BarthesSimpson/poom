@@ -1,27 +1,29 @@
-interface Message {
-  id: number;
-  text: string;
-}
+import { Message } from "../../../../schemas";
 
 export default class MessageService {
-  messages: Message[] = [];
+  messageLog: Message[] = [];
+  videoChats: Map<string, Message> = new Map();
 
   async find() {
     // Just return all our messages
-    return this.messages;
+    return this.messageLog;
   }
 
-  async create(data: Pick<Message, "text">) {
-    // The new message is the data text with a unique identifier added
-    // using the messages length since it changes whenever we add one
-    const message: Message = {
-      id: this.messages.length,
-      text: data.text,
-    };
+  async get(chatId: string) {
+    return this.videoChats.get(chatId);
+  }
 
-    // Add new message to the list
-    this.messages.push(message);
-
+  async create(message: Message) {
+    this.messageLog.push(message);
+    if (message.type == "hostOffer") {
+      this.videoChats.set(message.chatId, message);
+    }
+    // console.log("START ALL MESSAGES");
+    // console.log(this.messageLog);
+    // console.log("END ALL MESSAGES");
+    console.log("START ALL VIDEO CHATS");
+    console.log(this.videoChats);
+    console.log("END ALL VIDEOs CHATS");
     return message;
   }
 }

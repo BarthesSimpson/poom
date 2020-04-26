@@ -48,15 +48,14 @@ export default function (app: Application) {
   app.publish((data: any, hook: HookContext) => {
     // Here you can add event publishers to channels set up in `channels.js`
     // To publish only for a specific event use `app.publish(eventname, () => {})`
-
     console.log(
       "Publishing all events to all authenticated users. See `channels.js` and https://docs.feathersjs.com/api/channels.html for more information."
     ); // eslint-disable-line
-    console.log({ data, hook });
     // console.log({ data, hook });
-    // e.g. to publish all service events to all authenticated users use
+    const { method, path } = hook;
+    console.log({ data, method, path });
+    // TODO: create a channel per chatId instead of broadcasting all chats to all users
     return app.channel("anonymous");
-    // return app.channel("authenticated");
   });
 
   // Here you can also add service specific event publishers
