@@ -1,5 +1,5 @@
 {
   "host": "localhost",
   "port": "PORT",
-  "public": "../../../src/backend/public/"
+  "public": "../src/backend/public/"
 }
