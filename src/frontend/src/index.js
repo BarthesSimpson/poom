@@ -4,8 +4,8 @@ import io from "socket.io-client";
 let backendHost = "http://localhost:3030";
 let frontendHost = "http://localhost:1234";
 if (process.env.NODE_ENV === "production") {
-  backendHost = "https://poom-chat.herokuapp.com"
-  frontendHost = "https://poom-ui.herokuapp.com"
+  backendHost = "https://poom-chat.herokuapp.com";
+  frontendHost = "https://poom-ui.herokuapp.com";
 }
 const socket = io(backendHost);
 const app = feathers();
@@ -74,15 +74,10 @@ async function start() {
   console.log("Requesting local stream");
   startButton.disabled = true;
   try {
-    const stream = !isHost
-      ? await navigator.mediaDevices.getUserMedia({
-          audio: true,
-          video: true,
-        })
-      : await navigator.mediaDevices.getDisplayMedia({
-          audio: true,
-          video: true,
-        });
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: true,
+    });
     console.log("Received local stream");
     localVideo.srcObject = stream;
     localStream = stream;
