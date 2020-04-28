@@ -50,7 +50,6 @@ remoteVideo.addEventListener("resize", () => {
 });
 
 let localStream;
-let remoteStream;
 let chatId;
 let pc;
 const offerOptions = {
@@ -75,8 +74,8 @@ async function start() {
   startButton.disabled = true;
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: true,
+      audio: { sampleRate: { min: 11025, ideal: 22050, max: 48000 } },
+      video: { frameRate: { ideal: 16, max: 30 } },
     });
     console.log("Received local stream");
     localVideo.srcObject = stream;
