@@ -1,121 +1,181 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
-import feathers from "@feathersjs/client";
-import io from "socket.io-client";
-import AppShell from "@airbnb/lunar-app-shell";
-import AdaptiveGrid from "@airbnb/lunar/lib/components/AdaptiveGrid";
-import Grid from "@airbnb/lunar/lib/components/Grid";
-import { Col } from "@airbnb/lunar/lib/components/Grid";
-import LayoutShell from "@airbnb/lunar-layouts/lib/components/LayoutShell";
-import Layout from "@airbnb/lunar-layouts/lib/components/Layout";
-import Title from "@airbnb/lunar/lib/components/Title";
-import Spacing from "@airbnb/lunar/lib/components/Spacing";
-import IconButton from "@airbnb/lunar/lib/components/IconButton";
-import Button from "@airbnb/lunar/lib/components/Button";
-import ButtonGroup from "@airbnb/lunar/lib/components/ButtonGroup";
-import Divider from "@airbnb/lunar/lib/components/Divider";
-import Smile from "@airbnb/lunar-icons/lib/general/IconSmile";
-import CallIn from "@airbnb/lunar-icons/lib/general/IconCallIn";
-// import Phone from "@airbnb/lunar-icons/lib/general/IconPhone";
-// import Camera from "@airbnb/lunar-icons/lib/general/IconCamera";
-import Audio from "@airbnb/lunar-icons/lib/interface/IconAudio";
-import Video from "@airbnb/lunar-icons/lib/interface/IconVideo";
-import Laptop from "@airbnb/lunar-icons/lib/general/IconLaptop";
-let backendHost = "http://localhost:3030";
-let frontendHost = "http://localhost:1234";
+import React from "react";
+import {
+  Container,
+  Grid,
+  Header,
+  Image,
+  Sidebar,
+  Menu,
+  Segment,
+  Button,
+  ButtonGroup,
+  Step,
+  Icon,
+  Embed,
+  List,
+  Divider,
+} from "semantic-ui-react";
+import poomLogo from "./poom_logo.png";
+import videoPlaceholder from "./video-placeholder.jpg";
 
-const socket = io(backendHost);
-const app = feathers();
+import Draggable from "react-draggable"; // The default
 
-function parseUrl() {
-  const url = new URL(window.location.href);
-  const params = url.searchParams;
-  const chatId = params.get("chatId");
-  return { chatId };
-}
-
-export default function () {
+export default function FixedMenuLayout() {
   return (
-    <AppShell name="Poom">
-      <LayoutShell>
-        <Layout>
-          <Header />
-          <Divider />
-
-          <AdaptiveGrid
-            defaultItemsPerRow={1}
-            breakpoints={{
-              "800": 2,
-            }}
-          >
-            <Title level={2}>Yo homie</Title>
-            <Title level={2}>Drive slow homie</Title>
-          </AdaptiveGrid>
-        </Layout>
-      </LayoutShell>
-    </AppShell>
+    <>
+      <Menu fixed="top" borderless inverted>
+        <Menu.Item header>
+          <Image size="mini" src={poomLogo} style={{ marginRight: "0.5em" }} />
+          Poom
+        </Menu.Item>
+      </Menu>
+      <Container fluid text style={{ marginTop: "12vh" }}>
+        <Header as="h1">Poom is a free video conferencing app.</Header>
+        <Header as="h3">
+          It uses a novel P2P protocol so your conversation never passes through
+          our servers.
+        </Header>
+        <p>The name is a portmanteau of 💩 and Zoom</p>
+        <Container style={{ marginBottom: "2.5em" }} />
+        <Button size="massive">
+          <Icon name="phone" />
+          Start Call
+        </Button>
+      </Container>
+      <Menu fixed="bottom" inverted icon="labeled" widths={6}>
+        {/* <Container> */}
+        <Menu.Item name="microphone">
+          <Icon name="microphone" />
+          Unmute
+        </Menu.Item>
+        <Menu.Item name="video">
+          <Icon name="video" />
+          Start video
+        </Menu.Item>
+        <Menu.Item name="desktop">
+          <Icon name="desktop" />
+          Share Screen
+        </Menu.Item>
+        {/* </Container> */}
+      </Menu>
+    </>
   );
 }
 
-function Header() {
+function DraggableControls() {
   return (
-    <AdaptiveGrid
-      noGutter
-      defaultItemsPerRow={1}
-      breakpoints={{
-        "400": 1,
-        "600": 2,
-      }}
-    >
-      <div style={{ display: "flex", flexWrap: "wrap", flexBasis: "100" }}>
-        <Spacing inline top={1} right={2}>
-          <Title level={1} inline centerAlign={false}>
-            p<Smile inline={true} />
-            <Smile inline={true} />m
-          </Title>
-        </Spacing>
-        <Spacing inline top={2}>
-          <Title level={3} inline>
-            A portmanteau of 💩 and Zoom
-          </Title>
-        </Spacing>
-      </div>
-      <Controls />
-    </AdaptiveGrid>
+    <Draggable>
+      <Step.Group fluid stackable="tablet">
+        <Step active>
+          {/* <ButtonGroup> */}
+          <Button size="tiny" icon="microphone" />
+          <Button size="tiny" icon="video" />
+          {/* <Button  icon="desktop" /> */}
+          {/* </ButtonGroup> */}
+        </Step>
+        <Step active>
+          <Button size="huge">
+            <Icon name="phone" />
+            Start Call
+          </Button>
+        </Step>
+      </Step.Group>
+    </Draggable>
   );
 }
 
-function Controls() {
+function SideBySideVideos() {
   return (
-    <ButtonGroup endAlign stretched>
-      <IconButton>
-        <CallIn size="3em" />
-      </IconButton>
-      <IconButton>
-        <Video size="3em" />
-      </IconButton>
-      <IconButton>
-        <Laptop size="3em" />
-      </IconButton>
-    </ButtonGroup>
+    <Grid columns={2} divided>
+      <Grid.Row>
+        <Grid.Column>
+          <Draggable>
+            <Embed
+              autoplay={false}
+              brandedUI
+              color="white"
+              hd={false}
+              id="D0WnZyxp_Wo"
+              iframe={{
+                allowFullScreen: true,
+                style: {
+                  padding: 10,
+                },
+              }}
+              placeholder={videoPlaceholder}
+              source="youtube"
+            />
+          </Draggable>{" "}
+        </Grid.Column>
+        <Grid.Column>
+          <Draggable>
+            <Embed
+              autoplay={false}
+              brandedUI
+              color="white"
+              hd={false}
+              id="D0WnZyxp_Wo"
+              iframe={{
+                allowFullScreen: true,
+                style: {
+                  padding: 10,
+                },
+              }}
+              placeholder={videoPlaceholder}
+              source="youtube"
+            />
+          </Draggable>{" "}
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   );
 }
-// function Header() {
-//   return (
-//     <Grid endAlign>
-//       <Col span={8}>
-//         <Title level={1} inline>
-//           p<Smile inline={true} />
-//           <Smile inline={true} />m
-//         </Title>
-//         <Spacing left={2} inline>
-//           <Title level={3} inline>
-//             A portmanteau of 💩 and Zoom
-//           </Title>
-//         </Spacing>
-//       </Col>
-//       <Col span={4}>
-//         <Controls />
-//       </Col>
-//     </Grid>
-//   );
-// }
+
+function FooterCandidates() {
+  return (
+    <>
+      <Menu
+        fixed="bottom"
+        style={{
+          minHeight: "8vh",
+          maxHeight: "8vh",
+          boxSizing: "border-box",
+        }}
+        inverted
+        borderless
+        widths="1"
+      >
+        <Menu.Item header>
+          <Image size="mini" src={poomLogo} />
+        </Menu.Item>
+      </Menu>
+      <Segment
+        inverted
+        vertical
+        style={{
+          minHeight: "30vh",
+          maxHeight: "30vh",
+          boxSizing: "border-box",
+        }}
+      >
+        <Container textAlign="center">
+          <Image centered size="mini" src={poomLogo} />
+          <List horizontal inverted divided link size="small">
+            <List.Item as="a" href="#">
+              Site Map
+            </List.Item>
+            <List.Item as="a" href="#">
+              Contact Us
+            </List.Item>
+            <List.Item as="a" href="#">
+              Terms and Conditions
+            </List.Item>
+            <List.Item as="a" href="#">
+              Privacy Policy
+            </List.Item>
+          </List>
+        </Container>
+      </Segment>
+    </>
+  );
+}
